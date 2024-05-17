@@ -1,26 +1,37 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>Vue JS</h1>
+  <PenDriveOptionsAPI />
+  <PenDriveCompositionAPI
+    :selectedCapacity="selectedCapacity"
+    :changeSelectedCapacity="changeSelectedCapacity"
+    @increaseSelectedCapacity="increaseSelectedCapacity"
+  />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import PenDriveOptionsAPI from "./components/PenDriveOptionsAPI.vue";
+import PenDriveCompositionAPI from "./components/PenDriveCompositionAPI.vue";
+import { ref } from "vue";
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    PenDriveOptionsAPI,
+    PenDriveCompositionAPI,
+  },
+  setup() {
+    let selectedCapacity = ref(8);
+    const changeSelectedCapacity = (cap) => {
+      selectedCapacity.value = cap;
+    };
+    const increaseSelectedCapacity = (inc) => {
+      selectedCapacity.value += inc;
+    };
+    return {
+      selectedCapacity,
+      changeSelectedCapacity,
+      increaseSelectedCapacity,
+    };
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
